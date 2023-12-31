@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Add Recipe{% endblock %}
+{% block head %}
+{{ super() }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Add Recipe</h2>
+            <form method="post" action="{{ url_for('add_recipe') }}" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="ingredients" class="form-label">Ingredients:</label>
+                    <input type="text" class="form-control" id="ingredients" name="ingredients" required>
+                    <div class="invalid-feedback">
+                        Please enter ingredients.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="recipe_name" class="form-label">Recipe Name:</label>
+                    <input type="text" class="form-control" id="recipe_name" name="recipe_name" required>
+                    <div class="invalid-feedback">
+                        Please enter a recipe name.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="time_to_make" class="form-label">Time to Make (in minutes):</label>
+                    <input type="text" class="form-control" id="time_to_make" name="time_to_make" required>
+                    <div class="invalid-feedback">
+                        Please enter the time to make.
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-block">Add Recipe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

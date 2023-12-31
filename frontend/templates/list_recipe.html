@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">List of Recipes</h2>
+    <form method="post" action="{{ url_for('search_recipe') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" id="search_term" name="search_term" required placeholder="Search Term">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Recipe Name</th>
+                <th scope="col">Ingredients</th>
+                <th scope="col">Time to Make (minutes)</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>{{ recipe.recipe_name }}</td>
+                    <td>{{ recipe.Ingredients }}</td>
+                    <td>{{ recipe.How_much_timetomake }}</td>
+                    <td>
+                        <a href="{{ url_for('update_recipe', id=recipe.recipe_id) }}" class="btn btn-warning btn-sm me-2">Update</a>
+                        <a href="{{ url_for('delete_recipe', id=recipe.recipe_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
